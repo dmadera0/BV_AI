@@ -1,0 +1,23 @@
+{
+  "demo-client-001": {
+    "PutRequest": {
+      "Item": {
+        "clientId": {
+          "S": "demo-client-001"
+        },
+        "systemPrompt": {
+          "S": "You are a helpful customer service assistant for a demo company. Be friendly, professional, and concise in your responses."
+        },
+        "allowedOrigins": {
+          "S": "https://yourdomain.com,https://staging.yourdomain.com"
+        },
+        "monthlyTokenLimit": {
+          "N": "100000"
+        },
+        "escalationEmail": {
+          "S": "support@yourdomain.com"
+        }
+      }
+    }
+  }
+}

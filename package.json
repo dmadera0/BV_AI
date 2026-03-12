@@ -1,0 +1,27 @@
+{
+  "name": "buenavista-ai",
+  "version": "1.0.0",
+  "description": "White-label AI chat widget platform",
+  "type": "module",
+  "scripts": {
+    "deploy:lambda": "zip -j /tmp/function.zip lambda/index.mjs && aws lambda update-function-code --function-name buenavista-chat-proxy --zip-file fileb:///tmp/function.zip --region us-east-1",
+    "upload:widget": "aws s3 cp widget/widget.js s3://buenavista-widget/widget.js --content-type application/javascript",
+    "invalidate:cloudfront": "aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths '/widget.js'",
+    "logs": "aws logs tail /aws/lambda/buenavista-chat-proxy --follow --region us-east-1"
+  },
+  "keywords": [
+    "chat",
+    "widget",
+    "anthropic",
+    "claude",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.450.0",
+    "@aws-sdk/client-secrets-manager": "^3.450.0",
+    "@aws-sdk/util-dynamodb": "^3.450.0"
+  },
+  "devDependencies": {}
+}

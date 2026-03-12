@@ -1,0 +1,20 @@
+{
+  "clientId": {
+    "S": "acme-corp-001"
+  },
+  "systemPrompt": {
+    "S": "You are a helpful support agent for ACME Corporation. Answer questions about our products and services. If you don't know something, suggest contacting our support team at support@acme.com."
+  },
+  "allowedOrigins": {
+    "S": "https://acme.com,https://staging.acme.com,https://www.acme.com"
+  },
+  "monthlyTokenLimit": {
+    "N": "500000"
+  },
+  "escalationEmail": {
+    "S": "alerts@acme.com"
+  },
+  "model": {
+    "S": "claude-3-sonnet-20240229"
+  }
+}
