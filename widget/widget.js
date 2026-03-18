@@ -357,21 +357,22 @@
      * Attach event listeners to interactive elements
      */
     attachEventListeners() {
-      const toggleBtn = document.getElementById('buenavista-widget-button');
-      const closeBtn = document.getElementById('buenavista-widget-close');
-      const sendBtn = document.getElementById('buenavista-widget-send');
-      const inputField = document.getElementById('buenavista-widget-input');
+  const toggleBtn = document.getElementById('buenavista-widget-button');
+  const closeBtn = document.getElementById('buenavista-widget-close');
+  const sendBtn = document.getElementById('buenavista-widget-send');
+  const inputField = document.getElementById('buenavista-widget-input');
+  const self = this;
 
-      toggleBtn.addEventListener('click', () => this.toggle());
-      closeBtn.addEventListener('click', () => this.close());
-      sendBtn.addEventListener('click', () => this.sendMessage());
+  toggleBtn.addEventListener('click', function() { self.toggle(); });
+  closeBtn.addEventListener('click', function() { self.close(); });
+  sendBtn.addEventListener('click', function() { self.sendMessage(); });
 
-      inputField.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey && !this.state.isLoading) {
-          this.sendMessage();
-        }
-      });
-    },
+  inputField.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey && !self.state.isLoading) {
+      self.sendMessage();
+    }
+  });
+},
 
     /**
      * Toggle chat window open/closed
