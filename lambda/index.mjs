@@ -24,8 +24,7 @@ async function getApiKey() {
   try {
     const command = new GetSecretValueCommand({ SecretId: SECRET_NAME });
     const response = await secretsClient.send(command);
-    cachedApiKey = response.SecretString;
-    return cachedApiKey;
+    cachedApiKey = JSON.parse(response.SecretString).ANTHROPIC_API_KEY;
   } catch (error) {
     console.error(`Failed to retrieve API key from Secrets Manager: ${error.message}`);
     throw new Error('Unable to retrieve API key');
