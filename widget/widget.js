@@ -389,14 +389,14 @@
      */
     open() {
       const container = document.getElementById('buenavista-widget-container');
-      const window = document.getElementById('buenavista-widget-window');
+      const chatWindow = document.getElementById('buenavista-widget-window');
       const inputField = document.getElementById('buenavista-widget-input');
 
       if (this.config.position === 'bottom-left') {
         container.classList.add('bv-left');
       }
 
-      window.classList.remove('bv-hidden');
+      chatWindow.classList.remove('bv-hidden');
       this.state.isOpen = true;
       inputField.focus();
       inputField.disabled = false;
@@ -407,8 +407,8 @@
      * Close the chat window
      */
     close() {
-      const window = document.getElementById('buenavista-widget-window');
-      window.classList.add('bv-hidden');
+      const chatWindow = document.getElementById('buenavista-widget-window');
+      chatWindow.classList.add('bv-hidden');
       this.state.isOpen = false;
     },
 
@@ -526,5 +526,10 @@
   };
 
   // Expose globally
-  window.BuenaVistaWidget = BuenaVistaWidget;
+window.BuenaVistaWidget = BuenaVistaWidget;
+
+  // Auto-init from BV_CONFIG if present
+  if (window.BV_CONFIG) {
+    BuenaVistaWidget.init(window.BV_CONFIG);
+  }
 })();
