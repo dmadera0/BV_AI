@@ -50,26 +50,38 @@
       const container = document.createElement('div');
       container.id = 'buenavista-widget-container';
       container.innerHTML = `
-        <div id="buenavista-widget-button" class="bv-button" title="Open chat">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div id="buenavista-widget-button" class="bv-button" title="Chat with Daniel's AI">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
         </div>
         <div id="buenavista-widget-window" class="bv-window bv-hidden">
           <div class="bv-header">
-            <h3>Chat</h3>
-            <button id="buenavista-widget-close" class="bv-close-btn" title="Close chat">&times;</button>
+            <div class="bv-header-info">
+              <h3>${this.config.title || 'Chat'}</h3>
+              <span class="bv-header-subtitle">${this.config.subtitle || 'AI Assistant'}</span>
+            </div>
+            <button id="buenavista-widget-close" class="bv-close-btn" title="Close">&times;</button>
           </div>
-          <div class="bv-messages" id="buenavista-widget-messages"></div>
+          <div class="bv-messages" id="buenavista-widget-messages">
+            <div class="bv-welcome">
+              <div class="bv-welcome-icon">👋</div>
+              Ask me anything about Daniel's experience, skills, or projects.
+            </div>
+          </div>
           <div class="bv-input-area">
             <input
               type="text"
               id="buenavista-widget-input"
               class="bv-input"
-              placeholder="Type a message..."
+              placeholder="${this.config.placeholder || 'Type a message...'}"
               disabled
             />
-            <button id="buenavista-widget-send" class="bv-send-btn" disabled>Send</button>
+            <button id="buenavista-widget-send" class="bv-send-btn" disabled title="Send">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/>
+              </svg>
+            </button>
           </div>
         </div>
       `;
