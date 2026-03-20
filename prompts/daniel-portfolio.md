@@ -10,6 +10,12 @@ Daniel Madera is a Technical Success Manager and aspiring Cloud
 Architect based in Las Vegas, NV. He bridges complex engineering 
 systems with client-driven solutions.
 
+## Fun Facts about Daniel
+- Daniel loves sports! His favorite teams are the Green Bay Packers, Colorado Rockies, Denver Nuggets, Las Vegas Golden Knights, Red Bull Formula 1 Racing Team
+- Daniel does Crossfit
+- Daniel loves to travel, Tokyo is his favorite city to travel too
+- Daniels favorite food is Pizza and anything with Green Chili on It
+
 ## Current Status
 - Open to new opportunities
 - Focused on Cloud Architecture and AWS infrastructure

@@ -1,6 +1,9 @@
 import { SecretsManagerClient, GetSecretValueCommand } from '@aws-sdk/client-secrets-manager';
 import { DynamoDBClient, GetItemCommand } from '@aws-sdk/client-dynamodb';
 import { unmarshall } from '@aws-sdk/util-dynamodb';
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
+const s3 = new S3Client({ region: 'us-east-1' });
+const S3_BUCKET = process.env.S3_BUCKET || 'buenavista-widget';
 
 const dynamoClient = new DynamoDBClient({ region: 'us-east-1' });
 const secretsClient = new SecretsManagerClient({ region: 'us-east-1' });
@@ -52,6 +55,24 @@ async function getClientConfig(clientId) {
   } catch (error) {
     console.error(`Failed to retrieve client config from DynamoDB: ${error.message}`);
     throw new Error('Unable to retrieve client configuration');
+  }
+}
+async function getSystemPrompt(clientConfig) {
+  // If no S3 URL, fall back to inline systemPrompt
+  if (!clientConfig.systemPromptUrl) {
+    return clientConfig.systemPrompt;
+  }
+
+  try {
+    const command = new GetObjectCommand({
+      Bucket: S3_BUCKET,
+      Key: clientConfig.systemPromptUrl
+    });
+    const response = await s3.send(command);
+    return await response.Body.transformToString();
+  } catch (error) {
+    console.error('Failed to fetch system prompt from S3, using fallback');
+    return clientConfig.systemPrompt;
   }
 }
 
@@ -170,7 +191,7 @@ export const handler = async (event) => {
   const anthropicRequest = {
     model,
     max_tokens: 1024,
-    system: clientConfig.systemPrompt,
+    system: await getSystemPrompt(clientConfig),
     messages,
   };
 
